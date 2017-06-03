@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <resourceExtensions />
+    <wildcardResourcePatterns />
+    <annotationProcessing>
+      <profile default="true" name="Default" enabled="false">
+        <processorPath useClasspath="true" />
+      </profile>
+      <profile default="false" name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <processorPath useClasspath="true" />
+        <module name="common" />
+        <module name="logistics-data" />
+        <module name="logistics-manager" />
+        <module name="logistics-service" />
+        <module name="logistics-web" />
+      </profile>
+    </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="common" target="1.5" />
+      <module name="logistics" target="1.8" />
+      <module name="logistics-data" target="1.8" />
+      <module name="logistics-manager" target="1.8" />
+      <module name="logistics-service" target="1.8" />
+      <module name="logistics-web" target="1.8" />
+    </bytecodeTargetLevel>
+  </component>
+</project>
