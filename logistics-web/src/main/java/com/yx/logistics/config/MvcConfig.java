@@ -2,21 +2,14 @@ package com.yx.logistics.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
-import org.springframework.context.annotation.EnableAspectJAutoProxy;
-import org.springframework.format.FormatterRegistry;
 import org.springframework.http.converter.HttpMessageConverter;
+import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.scheduling.annotation.EnableAsync;
-import org.springframework.scheduling.annotation.EnableScheduling;
-import org.springframework.validation.MessageCodesResolver;
-import org.springframework.validation.Validator;
-import org.springframework.web.method.support.HandlerMethodArgumentResolver;
-import org.springframework.web.method.support.HandlerMethodReturnValueHandler;
-import org.springframework.web.multipart.commons.CommonsMultipartResolver;
-import org.springframework.web.servlet.HandlerExceptionResolver;
 import org.springframework.web.servlet.config.annotation.*;
 import org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -48,9 +41,31 @@ public class MvcConfig extends WebMvcConfigurerAdapter {
         return bean;
     }
 
-    @Bean
+    //@Bean
     public RequestMappingHandlerAdapter requestMappingHandlerAdapter(){
         RequestMappingHandlerAdapter requestMappingHandlerAdapter = new RequestMappingHandlerAdapter();
+        List<HttpMessageConverter<?>> messageConverters = new ArrayList<>();
+        HttpMessageConverter<?> jsonConverter = new MappingJackson2HttpMessageConverter();
+        messageConverters.add(jsonConverter);
+        requestMappingHandlerAdapter.setMessageConverters(messageConverters);
         return requestMappingHandlerAdapter;
+    }
+
+    /*@Bean
+    public HandlerExceptionResolver handlerExceptionResolver(){
+        HandlerExceptionResolver handle = (httpServletRequest, httpServletResponse, o, e) -> {
+           return new ModelAndView(new AbstractView() {
+               @Override
+               protected void renderMergedOutputModel(Map<String, Object> map, HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse) throws Exception {
+
+               }
+           }).addObject("error","");
+        };
+        return handle;
+    }*/
+
+    @Override
+    public void addResourceHandlers(ResourceHandlerRegistry registry) {
+        registry.addResourceHandler("/img/**/*").addResourceLocations("/img");
     }
 }
